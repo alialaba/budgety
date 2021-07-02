@@ -5,14 +5,22 @@ let budgetCntroller = (function () {
 
 //UI CONTROLLER
 let UIController = (function () {
+    //DOMs strings allocate variable
+    let DOMStrings = {
+        inputType: ".add__type",
+        inputDecription: ".add__description",
+        inputValue: ".add__value"
+    }
+
+
     //getting the inputs value
     return {
         getInputs: function () {
             //returning object of  the  inputs value
             return {
-                inputType: document.querySelector(".add__type").value,
-                inputDescription: document.querySelector(".add__description").value,
-                inputValue: document.querySelector(".add__value").value,
+                type: document.querySelector(DOMStrings.inputType).value,
+                description: document.querySelector(DOMStrings.inputDecription).value,
+                value: document.querySelector(DOMStrings.inputValue).value,
             }
         }
 
@@ -26,6 +34,7 @@ let controller = (function (budgetCtrl, UICtrl) {
     //function that add items
     const addItemCtrl = () => {
         //get the field input data
+
 
         let input = UICtrl.getInputs();
         console.log(input);
