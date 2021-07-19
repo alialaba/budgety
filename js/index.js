@@ -1,5 +1,5 @@
 //BUDGET CONTROLLER
-let budgetCntroller = (function () {
+let budgetController = (function () {
     let Income = function (id, decription, value) {
         this.id = id;
         this.decription = decription;
@@ -14,16 +14,46 @@ let budgetCntroller = (function () {
     }
     //data structure for adding item;
     let data = {
-        allItems={
+        allItems: {
             exp: [],
             inc: []
         },
-        total={
+        total: {
             exp: 0,
             inc: 0
         }
-
     }
+
+    return {
+        addItem: function (type, des, val) {
+            var newItem, ID;
+            if (data.allItems[type].length > 0) {
+                //ID is the unique number that got assign to each item added for expense || income;
+                ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+            } else {
+                ID = 0;
+            }
+
+            // create an item based on inc and exp
+            if (type === 'exp') {
+                newItem = new Expense(ID, des, val);
+            } else if (type === 'inc') {
+                newItem = new Income(ID, des, val);
+            }
+
+            //push into our data structure
+            data.allItems[type].push(newItem);
+
+            //return the new item element
+            return newItem;
+        },
+
+        testing: function () {
+            console.log(data)
+        }
+    };
+
+
 })();
 
 
@@ -49,7 +79,7 @@ let UIController = (function () {
             }
         },
         //method for getting access to DOMstring
-        getDOMStings: function () {
+        getDOMStrings: function () {
             return DOMStrings;
         }
     }
@@ -61,7 +91,7 @@ let controller = (function (budgetCtrl, UICtrl) {
 
     let setEventListeners = function () {
         //getting acces to the DOMstring in UICtrl
-        let DOM = UICtrl.getDOMStings();
+        let DOM = UICtrl.getDOMStrings();
 
         //button variable
         let addBtn = document.querySelector(DOM.addBtn);
@@ -78,11 +108,12 @@ let controller = (function (budgetCtrl, UICtrl) {
     }
     //function that add items
     const addItemCtrl = () => {
-        //get the field input data
-        let input = UICtrl.getInputs();
-        console.log(input);
-        //add the item to the budget controller
 
+        let input, newItem
+        //get the field input data
+        input = UICtrl.getInputs();
+        //add the item to the budget controller
+        newItem = budgetCtrl.addItem(input.type, input.description, input.value)
         //add the item to the UI
         //calculate the budget
         //display the budget  on the UI
@@ -96,7 +127,7 @@ let controller = (function (budgetCtrl, UICtrl) {
         }
     }
 
-})(budgetCntroller, UIController);
+})(budgetController, UIController);
 
 
 controller.init();
