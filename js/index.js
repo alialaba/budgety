@@ -70,8 +70,9 @@ let UIController = (function () {
     }
 
 
-    //getting the inputs value
+    //public
     return {
+        //getting the inputs value
         getInputs: function () {
             //method for returning object of  the  inputs value
             return {
@@ -80,7 +81,7 @@ let UIController = (function () {
                 value: document.querySelector(DOMStrings.inputValue).value,
             }
         },
-
+        //adding the list item
         addListItems: function (obj, type) {
             let html, newHtml, element
             //create HTML String with placeholder
