@@ -78,7 +78,7 @@ let UIController = (function () {
             return {
                 type: document.querySelector(DOMStrings.inputType).value,
                 description: document.querySelector(DOMStrings.inputDecription).value,
-                value: document.querySelector(DOMStrings.inputValue).value,
+                value: parseFloat(document.querySelector(DOMStrings.inputValue).value),
             }
         },
         //adding the list item
@@ -109,6 +109,7 @@ let UIController = (function () {
             var fields, fieldArr
             //inside the bracket we uses CSS format
             fields = document.querySelectorAll(DOMStrings.inputDecription + ', ' + DOMStrings.inputValue);
+            //covert to an array
             fieldArr = Array.prototype.slice.call(fields);
 
             // foreach method can accept 3 params in its callback function 
@@ -147,20 +148,34 @@ let controller = (function (budgetCtrl, UICtrl) {
         })
 
     }
+    var updateBudget = function () {
+        //1. calculate the budget
+
+        //2.Return the budget
+
+        //3.display the budget  on the UI
+    }
+
     //function that add items
     const addItemCtrl = () => {
 
         let input, newItem
         //1. get the field input data
         input = UICtrl.getInputs();
-        //2. add the item to the budget controller
-        newItem = budgetCtrl.addItem(input.type, input.description, input.value)
-        //3. add the item to the UI
-        UICtrl.addListItems(newItem, input.type);
-        //clear fields
-        UICtrl.clearfields();
-        //calculate the budget
-        //display the budget  on the UI
+        if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
+            //2. add the item to the budget controller
+            newItem = budgetCtrl.addItem(input.type, input.description, input.value)
+
+            //3. add the item to the UI
+            UICtrl.addListItems(newItem, input.type);
+
+            //4. clear fields
+            UICtrl.clearfields();
+            //5. calculate and update budget
+            updateBudget()
+        }
+
+
     }
     //set a public method
     return {

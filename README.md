@@ -30,10 +30,15 @@
 - How to do DOM manipulation using insertAdjacentHTML method.
 ## Clearing input fields
 ### What you will learn 
-- How to clear HTML Field
+- How to clear HTML Field (clearfields)
 - How to use querySelectorAll 
 - How to convert a list to an array.
 - A better way to loop through an array (for loop, foreach)
+## Updating buidget controller
+### What you will learn 
+
+- How to convert field inputs to numbers.
+- How to prevent false inputs.
 
 
 
