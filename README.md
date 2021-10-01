@@ -28,6 +28,13 @@
 - A technique for adding big chunks of HTML to the DOM (addListedItem)
 - How ato replace parts of strings 
 - How to do DOM manipulation using insertAdjacentHTML method.
+## Clearing input fields
+### What you will learn 
+- How to clear HTML Field
+- How to use querySelectorAll 
+- How to convert a list to an array.
+- A better way to loop through an array (for loop, foreach)
+
 
 
 *********************Tips on Module:*********************

@@ -104,6 +104,21 @@ let UIController = (function () {
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
         },
 
+        //method to clear fields
+        clearfields: function () {
+            var fields, fieldArr
+            //inside the bracket we uses CSS format
+            fields = document.querySelectorAll(DOMStrings.inputDecription + ', ' + DOMStrings.inputValue);
+            fieldArr = Array.prototype.slice.call(fields);
+
+            // foreach method can accept 3 params in its callback function 
+            fieldArr.forEach((cur, index, arr) => {
+                cur.value = '';
+            })
+
+            //bring back cursor to description input 
+            fieldArr[0].focus();
+        },
         //method for getting access to DOMstring
         getDOMStrings: function () {
             return DOMStrings;
@@ -136,12 +151,14 @@ let controller = (function (budgetCtrl, UICtrl) {
     const addItemCtrl = () => {
 
         let input, newItem
-        //get the field input data
+        //1. get the field input data
         input = UICtrl.getInputs();
-        //add the item to the budget controller
+        //2. add the item to the budget controller
         newItem = budgetCtrl.addItem(input.type, input.description, input.value)
-        //add the item to the UI
+        //3. add the item to the UI
         UICtrl.addListItems(newItem, input.type);
+        //clear fields
+        UICtrl.clearfields();
         //calculate the budget
         //display the budget  on the UI
     }
