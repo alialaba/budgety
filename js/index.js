@@ -78,6 +78,7 @@ let UIController = (function () {
             return {
                 type: document.querySelector(DOMStrings.inputType).value,
                 description: document.querySelector(DOMStrings.inputDecription).value,
+                //parseFloat changes to number
                 value: parseFloat(document.querySelector(DOMStrings.inputValue).value),
             }
         },

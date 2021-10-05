@@ -38,7 +38,9 @@
 ### What you will learn 
 
 - How to convert field inputs to numbers.
-- How to prevent false inputs.
+- How to prevent false inputs.(using if conditional )not empty inputs && not a number && not less than 1
+- How and why to create simple reusable functions with only one purpose
+- How to sum all elements of an array using forEach.
 
 
 
