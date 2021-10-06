@@ -34,15 +34,13 @@
 - How to use querySelectorAll 
 - How to convert a list to an array.
 - A better way to loop through an array (for loop, foreach)
-## Updating buidget controller
+## Updating the budget UI controller
 ### What you will learn 
 
-- How to convert field inputs to numbers.
-- How to prevent false inputs.(using if conditional )not empty inputs && not a number && not less than 1
-- How and why to create simple reusable functions with only one purpose
-- How to sum all elements of an array using forEach.
+- DOM Manipulation by updating the budget and total value
 
-
+## Updating buidget controller
+### What you will learn
 
 *********************Tips on Module:*********************
 - Module is an important aspect of any robust applications architecture
