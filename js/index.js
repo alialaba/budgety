@@ -72,7 +72,7 @@ let budgetController = (function () {
             data.budget = data.totals.inc - data.totals.exp;
 
             //calculate the percentage of income we spent
-            if (data.percentage > 0) {
+            if (data.totals.inc > 0) {
                 data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
 
             } else {
@@ -107,7 +107,12 @@ let UIController = (function () {
         inputValue: ".add__value",
         addBtn: ".add__btn",
         incomeContainer: ".income__list",
-        expensesContainer: '.expenses__list'
+        expensesContainer: '.expenses__list',
+        budgetLabel: '.budget__value',
+        incomeLabel: '.budget__income--value',
+        expenseLabel: '.budget__expenses--value',
+        percentageLabel: '.budget__expenses--percentage'
+
     }
 
 
@@ -162,6 +167,19 @@ let UIController = (function () {
             //bring back cursor to description input 
             fieldArr[0].focus();
         },
+        //method to display budget update on UI
+        displayBudget: function (obj) {
+            document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget
+            document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalInc
+            document.querySelector(DOMStrings.expenseLabel).textContent = obj.totalExp
+
+            if (obj.percentage > 0) {
+                document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
+            } else {
+                document.querySelector(DOMStrings.percentageLabel).textContent = '--';
+
+            }
+        },
         //method for getting access to DOMstring
         getDOMStrings: function () {
             return DOMStrings;
@@ -192,12 +210,13 @@ let controller = (function (budgetCtrl, UICtrl) {
     }
     var updateBudget = function () {
         //1. calculate the budget
-        budgetController.calculateBudget()
+        budgetCtrl.calculateBudget()
 
         //2.Return the budget
-        var budget = budgetController.getBudgets();
+        var budget = budgetCtrl.getBudgets();
         //3.display the budget  on the UI
-        console.log(budget)
+
+        UICtrl.displayBudget(budget)
     }
 
     //function that add items
@@ -221,11 +240,19 @@ let controller = (function (budgetCtrl, UICtrl) {
 
 
     }
-    //set a public method
+    //set a public method for running the app
     return {
         init: function () {
             console.log("the app is working");
             setEventListeners()
+
+            //reset all budgets to zero (0);
+            UICtrl.displayBudget({
+                budget: 0,
+                totalInc: 0,
+                totalExp: 0,
+                percentage: -1
+            })
 
         }
     }
