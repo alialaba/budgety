@@ -39,8 +39,6 @@
 
 - DOM Manipulation by updating the budget and total value
 
-## Updating buidget controller
-### What you will learn
 
 *********************Tips on Module:*********************
 - Module is an important aspect of any robust applications architecture
