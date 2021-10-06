@@ -18,11 +18,25 @@ let budgetController = (function () {
             exp: [],
             inc: []
         },
-        total: {
+        totals: {
             exp: 0,
             inc: 0
-        }
+
+        },
+        budget: 0,
+        //-1 is use to show that something is not exitense 
+        percentage: -1
     }
+    //function that calculate total budget
+    let calculateTotal = function (type) {
+        var sum = 0;
+        data.allItems[type].forEach((cur) => {
+            sum += cur.value;
+        })
+        //set data.totals[type] to the total sum
+        data.totals[type] = sum;
+    }
+
 
     return {
         addItem: function (type, des, val) {
@@ -46,6 +60,33 @@ let budgetController = (function () {
 
             //return the new item element
             return newItem;
+        },
+
+
+        //calculate budget method
+        calculateBudget: function () {
+            //calculate total income and expense
+            calculateTotal('exp');
+            calculateTotal('inc');
+            //calculate the budget:(income - expense)
+            data.budget = data.totals.inc - data.totals.exp;
+
+            //calculate the percentage of income we spent
+            if (data.percentage > 0) {
+                data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
+
+            } else {
+                data.percentage = -1;
+            }
+        },
+        //method that returns the calculatedtotal budget
+        getBudgets: function () {
+            return {
+                budget: data.budget,
+                totalInc: data.totals.inc,
+                totalExp: data.totals.exp,
+                percentage: data.percentage
+            }
         },
 
         testing: function () {
@@ -151,10 +192,12 @@ let controller = (function (budgetCtrl, UICtrl) {
     }
     var updateBudget = function () {
         //1. calculate the budget
+        budgetController.calculateBudget()
 
         //2.Return the budget
-
+        var budget = budgetController.getBudgets();
         //3.display the budget  on the UI
+        console.log(budget)
     }
 
     //function that add items
