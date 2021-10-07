@@ -1,4 +1,12 @@
-# budgety
+# BUDGETY 
+## Planning Step 1 Todo-List:
+- Add Event Listener
+- Get inputs values
+- Add new item to data structure
+- Add new item to UI
+- Calculate Budget
+- update the UI
+
 ## Implementing the module pattern
 ### What you will learn 
 - how to use the module pattern
@@ -38,6 +46,14 @@
 ### What you will learn 
 
 - DOM Manipulation by updating the budget and total value
+
+## Planning Step 2 Todo-List:
+- Add Event Listener
+- Delete item from data structure
+- Delete item from the UI
+- Re-calculate Budget
+- update the UI
+
 
 
 *********************Tips on Module:*********************
