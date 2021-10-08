@@ -54,6 +54,12 @@
 - Re-calculate Budget
 - update the UI
 
+## Setting up the delete event listener using event delegation
+### What you will learn 
+
+- How to use event delegation i practice 
+- How to use Unique IDs in HTML to connect the UI with data modal
+- How to use parentNode property for DOM Traversing.
 
 
 *********************Tips on Module:*********************
