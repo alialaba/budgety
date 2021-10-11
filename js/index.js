@@ -42,6 +42,7 @@ let budgetController = (function () {
         addItem: function (type, des, val) {
             var newItem, ID;
             if (data.allItems[type].length > 0) {
+                //e.g [12456]
                 //ID is the unique number that got assign to each item added for expense || income;
                 ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
             } else {
@@ -61,8 +62,21 @@ let budgetController = (function () {
             //return the new item element
             return newItem;
         },
+        //deleteItem method
+        deleteItem: function (type, id) {
+            var ids, index
+            //NB:different between Map and forEach method is bcus map returns new array;
+            //e.g ids=[12468]
+            //e.g index=3
+            ids = data.allItems[type].map((current) => {
+                return current.id;
+            })
+            index = ids.indexOf(id);
 
-
+            if (index !== -1) {
+                data.allItems[type].splice(index, 1)
+            }
+        },
         //calculate budget method
         calculateBudget: function () {
             //calculate total income and expense
@@ -207,6 +221,7 @@ let controller = (function (budgetCtrl, UICtrl) {
                 addItemCtrl();
             }
         })
+        //event listner that delete item 
         document.querySelector('.container').addEventListener('click', ctrlDeleteItem);
 
     }
@@ -247,12 +262,18 @@ let controller = (function (budgetCtrl, UICtrl) {
         var itemID, splitID, type, ID;
         //traversed to the parent element and retrieved the unique id
         itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
-        //removing - and converting itemID to an array;
-        splitID = itemID.split('-');
-        //inc-0 ||type[0] id[1]
-        type = splitID[0];
-        ID = splitID[1];
+        if (itemID) {
+            //removing - and converting itemID to an array;
+            splitID = itemID.split('-');
+            //inc-0 ||type[0] id[1]
+            type = splitID[0];
+            //convert to number first
+            ID = parseInt(splitID[1]);
+            // 1. delete item from the data structure
+            budgetCtrl.deleteItem(type, ID)
+            // 2. delete item from the UI
 
+        }
     }
 
     //set a public method for running the app
