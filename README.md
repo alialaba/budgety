@@ -95,11 +95,17 @@
 - How to loop over an array using map method
 - How to remove elements from an array using splice method
 
-**********\***********Tips on Module:**********\***********
+## deleting an item from UI
+
+### What you will learn
+
+- How to remove an element from the DOM(more DOM Manipulation)
+
+****\*\*****\*****\*\*****Tips on Module:****\*\*****\*****\*\*****
 
 - Module is an important aspect of any robust applications architecture
 - keeps the units of codes for project both cleanly seperated and organized.
 - Encapsulate some data into privacy and expose some publicly.
   NB:We create module in our project is because we want to keep pieces of our codes related to one another together inside a seperate and independent and organised unit and in each of this module, it will have varaible,methods and functions that are private meaning they are only accessible inside the module. so that no other code will over write our data, so our data or code will be save .apart from variables, functions we will also have public variables, methods and functions that can be acess publicly.
-  **********\***********Creation of Module**********\***********
+  ****\*\*****\*****\*\*****Creation of Module****\*\*****\*****\*\*****
   this can be done by using module pattern by knowing the consect of closures and IIFE
