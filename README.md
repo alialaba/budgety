@@ -109,6 +109,10 @@
 - Number formatting
 - improve input field UX
 
+## Updating the percentage in the controller:
+
+- Reinforcing the concepts and technques learnt so far
+
 \***\*\*\*\*\***\*\***\*\*\*\*\***Tips on Module:\***\*\*\*\*\***\*\***\*\*\*\*\***
 
 - Module is an important aspect of any robust applications architecture
