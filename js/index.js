@@ -55,6 +55,10 @@ let budgetController = (function () {
     return {
         addItem: function (type, des, val) {
             var newItem, ID;
+            // [1 2 3 4 5], next ID = 6
+            // [1 2 4 6 8], next ID = 9
+            // ID = last ID + 1
+            // Create new ID
             if (data.allItems[type].length > 0) {
                 //e.g [12456]
                 //ID is the unique number that got assign to each item added for expense || income;
@@ -82,11 +86,14 @@ let budgetController = (function () {
             //NB:different between Map and forEach method is bcus map returns new array;
             //e.g ids=[12468]
             //e.g index=3
+            // Create an array with all the id's using map
+
             ids = data.allItems[type].map((current) => {
                 return current.id;
             })
+            // Get the index of the array by id
             index = ids.indexOf(id);
-
+            // Use the index to delete the correct item from the data structure
             if (index !== -1) {
                 data.allItems[type].splice(index, 1)
             }
@@ -163,7 +170,15 @@ let UIController = (function () {
         incomeLabel: '.budget__income--value',
         expenseLabel: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
-        container: '.container'
+        container: '.container',
+        expensesPercentageLabel: 'budget__expenses--percentage'
+
+    }
+    // Own function to loop through a nodeList 
+    let nodeListForEach = function (list, callback) {
+        for (var i = 0; i < list.length; i++) {
+            callback(list[i], i) //current element and index are passed to the callback function that gets called for every element
+        }
 
     }
 
@@ -237,6 +252,7 @@ let UIController = (function () {
 
             }
         },
+        //method that display expenses percentage
         //method for getting access to DOMstring
         getDOMStrings: function () {
             return DOMStrings;
@@ -285,7 +301,8 @@ let controller = (function (budgetCtrl, UICtrl) {
         //2. Read percentage from the Controller
         var percentages = budgetCtrl.getPercentage();
         //3.Display the UI with new percentage
-        console.log(percentages)
+        // console.log(percentages)
+        UICtrl.displayExpensesPercentage(percentages)
     }
 
     //function that add items
@@ -318,7 +335,7 @@ let controller = (function (budgetCtrl, UICtrl) {
         itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
         if (itemID) {
             //removing - and converting itemID to an array;
-            splitID = itemID.split('-');
+            splitID = itemID.split('-'); // 'inc-1' ==> ['inc', '1']
             //inc-0 ||type[0] id[1]
             type = splitID[0];
             //convert to number first
