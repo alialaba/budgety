@@ -171,7 +171,7 @@ let UIController = (function () {
         expenseLabel: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
         container: '.container',
-        expensesPercentageLabel: 'budget__expenses--percentage'
+        expensesPercentageLabel: '.item__percentage'
 
     }
     // Own function to loop through a nodeList 
@@ -253,6 +253,18 @@ let UIController = (function () {
             }
         },
         //method that display expenses percentage
+        displayExpensesPercentage: function (percentage) {
+            var fields;
+            fields = document.querySelectorAll(DOMStrings.expensesPercentageLabel)
+            nodeListForEach(fields, (current, index) => {
+                if (percentage[index] > 0) {
+                    current.textContent = percentage[index] + '%';
+                } else {
+                    current.textContent = '---';
+                }
+
+            });
+        },
         //method for getting access to DOMstring
         getDOMStrings: function () {
             return DOMStrings;
