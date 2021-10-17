@@ -171,7 +171,8 @@ let UIController = (function () {
         expenseLabel: '.budget__expenses--value',
         percentageLabel: '.budget__expenses--percentage',
         container: '.container',
-        expensesPercentageLabel: '.item__percentage'
+        expensesPercentageLabel: '.item__percentage',
+        dateLabel: '.budget__title--month'
 
     }
     // Own function to loop through a nodeList 
@@ -238,6 +239,16 @@ let UIController = (function () {
 
             //bring back cursor to description input 
             fieldArr[0].focus();
+        },
+
+        //method to display month
+        displayMonth: function () {
+            var month, months, now, year;
+            months = ['January', 'Februry', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            now = new Date();
+            month = now.getMonth()
+            year = now.getFullYear();
+            document.querySelector(DOMStrings.dateLabel).textContent = months[month] + ', ' + year;
         },
         //method to display budget update on UI
         displayBudget: function (obj) {
@@ -377,6 +388,8 @@ let controller = (function (budgetCtrl, UICtrl) {
                 totalExp: 0,
                 percentage: -1
             })
+
+            UICtrl.displayMonth()
 
         }
     }
