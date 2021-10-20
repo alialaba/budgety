@@ -175,6 +175,39 @@ let UIController = (function () {
         dateLabel: '.budget__title--month'
 
     }
+    let formatNumber = function (number, type) {
+        var numSplit, int, dec;
+        /* 
+        + or - before number
+        exactly 2 decimal points
+        comma seperating the thousands
+        2310.4567 -> + 2,310.46
+        2000 -> 2,000.00
+        */
+
+        // Get the absolute value of the number
+        number = Math.abs(number)
+
+        // Set the decimal part of the number to a maximum of 2 and return it as a string
+        number = number.toFixed(2);
+
+        // Split up our number in an integer part and decimal part
+        // '2132.14' -> ['2132', '14']
+        numSplit = number.split('.')
+
+        // Set the integer part in a variable
+        int = numSplit[0];
+
+        // format our integer part to add commas for every 3 numbers
+        if (int.length > 3) {
+            int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3); //input 2310, output 2,310
+        }
+
+        // our decimal part is already correct
+        dec = numSplit[1];
+        // Return our formatted number with correct operator
+        return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
+    }
     // Own function to loop through a nodeList 
     let nodeListForEach = function (list, callback) {
         for (var i = 0; i < list.length; i++) {
@@ -252,9 +285,14 @@ let UIController = (function () {
         },
         //method to display budget update on UI
         displayBudget: function (obj) {
-            document.querySelector(DOMStrings.budgetLabel).textContent = obj.budget
-            document.querySelector(DOMStrings.incomeLabel).textContent = obj.totalInc
-            document.querySelector(DOMStrings.expenseLabel).textContent = obj.totalExp
+
+            var type;
+            obj.budget > 0 ? type = 'inc' : type = 'exp'; //determine if budget is - or +
+
+
+            document.querySelector(DOMStrings.budgetLabel).textContent = formatNumber(obj.budget, type)
+            document.querySelector(DOMStrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc')
+            document.querySelector(DOMStrings.expenseLabel).textContent = formatNumber(obj.totalExp, 'exp')
 
             if (obj.percentage > 0) {
                 document.querySelector(DOMStrings.percentageLabel).textContent = obj.percentage + '%';
